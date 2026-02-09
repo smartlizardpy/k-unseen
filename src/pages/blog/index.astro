@@ -1,0 +1,212 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { ChevronRight, Calendar, User } from "lucide-astro";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Layout title="REPORTS | Intelligence Reports">
+    <nav class="navbar">
+        <div class="logo">K-UNSEEN<span>_</span></div>
+        <ul class="nav-links">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/the-situation">SITUATION</a></li>
+            <li><a href="/blog">REPORTS</a></li>
+        </ul>
+        <button class="btn-join">JOIN THE REBELLION</button>
+    </nav>
+
+    <main class="blog-container container">
+        <header class="blog-header">
+            <h1 class="glitch" data-text="INTELLIGENCE REPORTS">
+                INTELLIGENCE REPORTS
+            </h1>
+            <p class="subtitle">
+                Dispatches from the underground. Analyzing the machine from the
+                inside out.
+            </p>
+        </header>
+
+        <div class="posts-grid">
+            {
+                posts.map((post) => (
+                    <a href={`/blog/${post.slug}`} class="post-card">
+                        <div class="post-meta">
+                            <span class="post-date">
+                                <Calendar size={12} />{" "}
+                                {post.data.pubDate.toLocaleDateString()}
+                            </span>
+                            <span class="post-author">
+                                <User size={12} /> {post.data.author}
+                            </span>
+                        </div>
+                        <h2>{post.data.title}</h2>
+                        <p>{post.data.description}</p>
+                        <div class="post-footer">
+                            <div class="tags">
+                                {post.data.tags.map((tag) => (
+                                    <span>#{tag}</span>
+                                ))}
+                            </div>
+                            <div class="read-more">
+                                READ REPORT <ChevronRight size={14} />
+                            </div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .blog-container {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+
+    .blog-header {
+        text-align: center;
+        margin-bottom: 6rem;
+    }
+
+    h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+    }
+
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+    }
+
+    .post-card {
+        background: #0a0a0a;
+        padding: 3rem;
+        border: 1px solid #151515;
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .post-card:hover {
+        border-color: var(--accent-color);
+        transform: translateY(-5px);
+    }
+
+    .post-meta {
+        display: flex;
+        gap: 1.5rem;
+        font-family: var(--font-mono);
+        color: var(--accent-color);
+        font-size: 0.75rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: #eee;
+    }
+
+    p {
+        color: var(--muted-color);
+        margin-bottom: 2rem;
+        flex-grow: 1;
+    }
+
+    .post-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-top: 1px solid #151515;
+        padding-top: 1.5rem;
+        gap: 1rem;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: #555;
+        max-width: 70%;
+    }
+
+    .read-more {
+        font-family: var(--font-heading);
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 1.1rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 4rem;
+        background: rgba(5, 5, 5, 0.8);
+        backdrop-filter: blur(15px);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .logo span {
+        color: var(--accent-color);
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted-color);
+    }
+
+    .nav-links a:hover {
+        color: var(--accent-color);
+    }
+
+    .btn-join {
+        background: var(--accent-color);
+        border: none;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        cursor: pointer;
+    }
+</style>

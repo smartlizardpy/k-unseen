@@ -1,0 +1,182 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { ChevronLeft, Calendar, User } from "lucide-astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} | INTEL REPORT`}>
+    <nav class="sub-nav">
+        <a href="/blog" class="btn-back">
+            <ChevronLeft size={20} /> BACK TO REPORTS
+        </a>
+        <div class="page-title">TRANSCRIPT_{post.slug.toUpperCase()}</div>
+    </nav>
+
+    <main class="post-content container">
+        <header class="post-header">
+            <div class="post-meta-detailed">
+                <span class="tag-accent">#REPORT_{post.data.tags[0]}</span>
+                <span class="meta-item"
+                    ><Calendar size={14} />
+                    {post.data.pubDate.toLocaleDateString()}</span
+                >
+                <span class="meta-item"
+                    ><User size={14} /> IDENTIFIED: {post.data.author}</span
+                >
+            </div>
+            <h1 class="post-title">{post.data.title}</h1>
+            <p class="post-description">{post.data.description}</p>
+        </header>
+
+        <div class="markdown-body">
+            <Content />
+        </div>
+
+        <footer class="post-footer-actions">
+            <a href="/blog" class="btn-outline">RETURN TO REPORTS</a>
+        </footer>
+    </main>
+</Layout>
+
+<style>
+    .sub-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 60px;
+        background: #000;
+        border-bottom: 1px solid #1a1a1a;
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        justify-content: space-between;
+        z-index: 1001;
+    }
+
+    .btn-back {
+        background: transparent;
+        border: none;
+        color: var(--accent-color);
+        font-family: var(--font-mono);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 0.8rem;
+    }
+
+    .page-title {
+        font-family: var(--font-mono);
+        color: #333;
+        font-size: 0.8rem;
+    }
+
+    .post-content {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+        max-width: 800px;
+    }
+
+    .post-header {
+        margin-bottom: 5rem;
+        border-bottom: 1px solid #151515;
+        padding-bottom: 3rem;
+    }
+
+    .post-meta-detailed {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        font-family: var(--font-mono);
+        color: #555;
+        font-size: 0.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .tag-accent {
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .post-title {
+        font-size: 4rem;
+        line-height: 1;
+        margin-bottom: 2rem;
+        color: #fff;
+    }
+
+    .post-description {
+        font-size: 1.4rem;
+        color: var(--muted-color);
+        font-family: var(--font-mono);
+        line-height: 1.5;
+    }
+
+    .markdown-body {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #bbb;
+    }
+
+    .markdown-body :global(h2) {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        color: #fff;
+        margin: 4rem 0 1.5rem;
+    }
+
+    .markdown-body :global(p) {
+        margin-bottom: 2rem;
+    }
+
+    .markdown-body :global(blockquote) {
+        border-left: 4px solid var(--accent-color);
+        padding-left: 2rem;
+        margin: 3rem 0;
+        font-style: italic;
+        color: #fff;
+        background: #111;
+        padding: 2rem;
+    }
+
+    .post-footer-actions {
+        margin-top: 6rem;
+        padding-top: 4rem;
+        border-top: 1px solid #151515;
+    }
+
+    .btn-outline {
+        display: inline-block;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        font-family: var(--font-heading);
+        font-size: 1.2rem;
+        transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+</style>

@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ChevronLeft, ExternalLink, ShieldAlert, HeartPulse, Scale, Info } from 'lucide-astro';
+
+const situations = [
+        {
+            id: "slave-contracts",
+            title: "The Reality of Slave Contracts",
+            icon: Scale,
+            situation:
+                "So-called 'slave contracts' in K-pop describe excessively long and restrictive agreements—often lasting up to 13 years—that bind young trainees to agencies. These contracts frequently include training debt for housing, food, and lessons, which idols must repay from future earnings, leaving many unpaid for years.",
+            impact: "Artists lose control over their finances and personal lives, including dating bans and image control, while agencies retain the majority of profits and legal power.",
+            sources: [
+                {
+                    name: "BBC News –The dark side of South Korean pop music’",
+                    url: "https://www.bbc.co.uk/news/world-asia-pacific-13760064",
+                },
+                {
+                    name: "IBT – K-pop Contract Wars: Stars Speak Out as Fan Protests Erupt Over Restrictive Deals",
+                    url: "https://www.ibtimes.co.uk/kpop-contract-wars-stars-speak-out-fan-protests-erupt-over-restrictive-deals-1759448",
+                },
+                {
+                    name: "The Korea Times – K-pop legal feuds highlight power of contracts as NewJeans, EXO members lose disputes",
+                    url: "https://www.koreatimes.co.kr/entertainment/k-pop/20251102/k-pop-legal-feuds-highlight-power-of-contracts-as-newjeans-exo-members-lose-disputes",
+                },
+            ],
+            color: "#ff1f1f",
+        },
+        {
+            id: "mental-health",
+            title: "The Mental Health Crisis",
+            icon: HeartPulse,
+            situation:
+                "K-pop idols operate under extreme pressure, facing relentless schedules, online harassment, invasive fan culture, and strict image management. Seeking mental-health support is often discouraged due to stigma and fears of damaging an idol’s marketability.",
+            impact: "A series of high-profile suicides has highlighted the severe psychological toll of the industry and sparked public debate over artist welfare and agency responsibility.",
+            sources: [
+                {
+                    name: "CBC – The hard life of K-pop stars",
+                    url: "https://www.cbc.ca/news/entertainment/kpop-hard-life-1.4545627",
+                },
+                {
+                    name: "The Financial Express – The unseen toll of fame: K-pop’s suicide crisis",
+                    url: "https://www.financialexpress.com/world-news/the-unseen-toll-of-fame-k-pops-suicide-crisis/3678361/",
+                },
+                {
+                    name: "Wokewaves – K-pop Idol Burnout & Beauty Pressure",
+                    url: "https://www.wokewaves.com/posts/kpop-idol-burnout-beauty-pressure",
+                },
+            ],
+            color: "#ff4d4d",
+        },
+        {
+            id: "diet-culture",
+            title: "Extreme Diet Culture & Beauty Standards",
+            icon: ShieldAlert,
+            situation:
+                "Many K-pop agencies impose strict beauty and weight standards, including frequent weigh-ins and extreme dieting practices. Former idols have described surviving on minimal food—such as ice cubes or a single sweet potato a day—before performances or comebacks.",
+            impact: "These practices contribute to eating disorders, long-term health damage, and physical collapse during rehearsals or live shows, while the realities are often concealed from fans.",
+            sources: [
+                {
+                    name: "The Guardian – Escape the corset: South Korean women rebel against strict beauty standards",
+                    url: "https://medium.com/the-guardian/escape-the-corset-south-korean-women-rebel-against-strict-beauty-standards-144e30d9b315",
+                },
+                {
+                    name: "The Asia Review – Extreme Dieting Struggles Take Toll on K-Pop Idols’ Health",
+                    url: "https://theasiareview.com/extreme-dieting-struggles-take-toll-on-k-pop-idols-health/",
+                },
+                {
+                    name: "BBC News – They were drawn to Korea with dreams of K-pop stardom - but then let down",
+                    url: "https://www.bbc.co.uk/news/articles/cvgnq9rwyqno",
+                },
+            ],
+            color: "#880000",
+        },
+    ];
+---
+
+<Layout title="Situation Report | UNSEEN">
+    <div class="situation-page">
+        <nav class="sub-nav">
+            <a href="/" class="btn-back">
+                <ChevronLeft size={20} /> BACK TO BASE
+            </a>
+            <div class="page-title">SITUATION_REPORT_V1.1_ASTRO</div>
+        </nav>
+
+        <main class="content container">
+            <header class="page-header">
+                <h1 class="glitch" data-text="THE UNVARNISHED TRUTH">THE UNVARNISHED TRUTH</h1>
+                <p class="subtitle">Detailed analysis of the systemic failures within the K-pop industrial complex.</p>
+            </header>
+
+            <div class="situations-list">
+                {situations.map((item) => (
+                    <article class="situation-card">
+                        <div class="card-sidebar" style={`background: ${item.color}`}>
+                            <item.icon size={32} color="white" />
+                        </div>
+                        <div class="card-body">
+                            <h2>{item.title}</h2>
+                            
+                            <div class="section">
+                                <h3 class="label-heading"><Info size={14} /> THE SITUATION</h3>
+                                <p>{item.situation}</p>
+                            </div>
+
+                            <div class="section">
+                                <h3 class="label-heading"><ShieldAlert size={14} /> IMPACT</h3>
+                                <p>{item.impact}</p>
+                            </div>
+
+                            <div class="sources-box">
+                                <h3 class="label-heading">VERIFIED SOURCES</h3>
+                                <div class="links">
+                                    {item.sources.map((source) => (
+                                        <a href={source.url} target="_blank" rel="noopener noreferrer" class="source-link">
+                                            {source.name} <ExternalLink size={12} />
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .situation-page {
+        min-height: 100vh;
+        background: #050505;
+        color: white;
+        padding-top: 80px;
+    }
+
+    .sub-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 60px;
+        background: #000;
+        border-bottom: 1px solid #1a1a1a;
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        justify-content: space-between;
+        z-index: 1001;
+    }
+
+    .btn-back {
+        background: transparent;
+        border: none;
+        color: var(--accent-color);
+        font-family: var(--font-mono);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .page-title {
+        font-family: var(--font-mono);
+        color: #333;
+        font-size: 0.8rem;
+    }
+
+    .page-header {
+        margin: 4rem 0 6rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+    }
+
+    .subtitle {
+        font-family: var(--font-mono);
+        color: var(--muted-color);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .situations-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        padding-bottom: 10rem;
+    }
+
+    .situation-card {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        background: #0a0a0a;
+        border: 1px solid #151515;
+        min-height: 400px;
+    }
+
+    .card-sidebar {
+        display: flex;
+        justify-content: center;
+        padding-top: 3rem;
+    }
+
+    .card-body {
+        padding: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        color: #eee;
+        letter-spacing: normal;
+        font-family: var(--font-heading);
+    }
+
+    .section {
+        margin-bottom: 2.5rem;
+    }
+
+    .label-heading {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--accent-color);
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    p {
+        color: #bbb;
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .sources-box {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid #151515;
+    }
+
+    .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .source-link {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: #555;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .source-link:hover {
+        color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+        .situation-card { grid-template-columns: 1fr; }
+        .card-sidebar { height: 60px; padding-top: 0; align-items: center; }
+        .card-body { padding: 2rem; }
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+    }
+</style>

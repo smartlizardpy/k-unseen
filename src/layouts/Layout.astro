@@ -1,0 +1,98 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Exposing the dark side of the K-Pop industry and celebrating raw, independent musical expression.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<ClientRouter />
+	</head>
+	<body>
+		<slot />
+
+		<script>
+			// Global cursor logic
+			document.addEventListener("astro:page-load", () => {
+				// Prevent duplicate cursors on navigation
+				if (document.querySelector(".cursor-dot-global")) return;
+				const dot = document.createElement("div");
+				const outline = document.createElement("div");
+				dot.className = "cursor-dot-global";
+				outline.className = "cursor-outline-global";
+				document.body.appendChild(dot);
+				document.body.appendChild(outline);
+
+				let cursorX = 0;
+				let cursorY = 0;
+				let outlineX = 0;
+				let outlineY = 0;
+
+				window.addEventListener("mousemove", (e) => {
+					cursorX = e.clientX;
+					cursorY = e.clientY;
+					dot.style.left = `${cursorX}px`;
+					dot.style.top = `${cursorY}px`;
+				});
+
+				const animate = () => {
+					outlineX += (cursorX - outlineX) * 0.1;
+					outlineY += (cursorY - outlineY) * 0.1;
+					outline.style.left = `${outlineX}px`;
+					outline.style.top = `${outlineY}px`;
+					requestAnimationFrame(animate);
+				};
+				animate();
+			});
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	.cursor-dot-global {
+		width: 8px;
+		height: 8px;
+		background: var(--accent-color);
+		position: fixed;
+		pointer-events: none;
+		z-index: 9999;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.cursor-outline-global {
+		width: 40px;
+		height: 40px;
+		border: 1px solid var(--accent-color);
+		position: fixed;
+		pointer-events: none;
+		z-index: 9998;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	body {
+		cursor: none;
+	}
+
+	button,
+	a {
+		cursor: none;
+	}
+</style>

@@ -1,0 +1,579 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ChevronRight, Skull, Newspaper, Ghost, Factory } from "lucide-astro";
+
+const headlines = [
+    {
+        tag: "EXPLOITATION",
+        title: "THIRTEEN HOUR REHEARSALS: THE K-POP COST",
+        desc: "Underage trainees subjected to extreme physical labor and strictly controlled diets since the age of 10 in Seoul factories.",
+        date: "FEB 2026",
+        id: 1,
+        slug: "rehersals",
+    },
+    {
+        tag: "DEBT TRAP",
+        title: "THE K-POP SLAVE CONTRACTS REVIVED",
+        desc: "Despite law changes, hidden fees and training debts keep young K-pop idols in financial bondage for decades.",
+        date: "JAN 2026",
+        id: 2,
+        slug: "the-situation", // This one can still go to the general situation page
+    },
+    {
+        tag: "MENTAL HEALTH",
+        title: "K-POP SILENCE BEYOND THE GLITTER",
+        desc: "The alarming rise of mental health crises among global girl groups hidden behind vibrant dance moves.",
+        date: "DEC 2025",
+        id: 3,
+        slug: "the-situation",
+    },
+    {
+        tag: "MANIPULATION",
+        title: "ALGORITHMS OVER ARTISTS: K-POP BOTS",
+        desc: "How major K-pop labels use automated bots to fake stream counts and manufacture 'organic' global popularity.",
+        date: "NOV 2025",
+        id: 4,
+        slug: "k-pop-bots",
+    },
+];
+---
+
+<Layout title="K-UNSEEN | Deconstruct the Machine">
+    <nav class="navbar">
+        <div class="logo">K-UNSEEN<span>_</span></div>
+        <ul class="nav-links">
+            <li><a href="/#dark-side">SHADOWS</a></li>
+            <li><a href="/the-situation">SITUATION</a></li>
+            <li><a href="/blog">REPORTS</a></li>
+        </ul>
+        <button class="btn-join">JOIN THE REBELLION</button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="glitch-container">
+                <h1 class="glitch" data-text="DECONSTRUCT THE K-POP MACHINE">
+                    DECONSTRUCT THE K-POP MACHINE
+                </h1>
+            </div>
+            <p class="hero-sub">
+                Where manufacturing ends, reality begins. Exposing the Seoul
+                factory that turned art into an industry.
+            </p>
+            <div class="hero-btns">
+                <a href="/the-situation" class="btn-primary">THE SITUATION</a>
+                <a href="/blog" class="btn-outline">INTEL REPORTS</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="dark-side" class="dark-side">
+        <div class="container">
+            <div class="section-header">
+                <span class="pre-title">THE SYSTEMIC TRAP</span>
+                <h2 class="title">THE DARK SIDE OF K-POP</h2>
+            </div>
+
+            <div class="features-grid">
+                <a href="/blog/idolfarms" class="feature-card">
+                    <Factory class="icon" size={40} />
+                    <h3>Idol Factories</h3>
+                    <p>
+                        Standardized human production. Every smile, every
+                        gesture, curated by a board of directors for maximum ROI
+                        in the global market.
+                    </p>
+                </a>
+                <a href="/the-situation" class="feature-card highlighted">
+                    <Skull class="icon" size={40} />
+                    <h3>Disposable Souls</h3>
+                    <p>
+                        When the shine fades, the K-pop machine discards. No
+                        support, no future, just the next trainee in line.
+                    </p>
+                </a>
+                <a href="/blog/ghost-composers" class="feature-card">
+                    <Ghost class="icon" size={40} />
+                    <h3>Ghost Composers</h3>
+                    <p>
+                        Global K-pop hits written by underpaid freelancers while
+                        major labels take the credit and the royalty checks.
+                    </p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="news">
+        <div class="marquee">
+            <div class="marquee-inner">
+                <span
+                    >URGENT: K-POP SYSTEM FAILURE DETECTED • THE GLITTER IS
+                    FADING • BREAK THE SLAVE CONTRACTS • REALITY OVER REPLICANTS
+                    •
+                </span>
+                <span
+                    >URGENT: K-POP SYSTEM FAILURE DETECTED • THE GLITTER IS
+                    FADING • BREAK THE SLAVE CONTRACTS • REALITY OVER REPLICANTS
+                    •
+                </span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="news-layout">
+                <div class="news-header">
+                    <Newspaper class="news-icon" size={32} />
+                    <h2>THE REDACTED K-HEADLINES</h2>
+                    <p>
+                        The truths the K-pop industry spends millions to
+                        suppress.
+                    </p>
+                </div>
+
+                <div class="headlines-list">
+                    {
+                        headlines.map((item) => (
+                            <a
+                                href={
+                                    item.slug === "the-situation"
+                                        ? "/the-situation"
+                                        : `/blog/${item.slug}`
+                                }
+                                class="headline-item"
+                            >
+                                <div class="headline-meta">
+                                    <span class="tag">{item.tag}</span>
+                                    <span class="date">{item.date}</span>
+                                </div>
+                                <h3>{item.title}</h3>
+                                <p>{item.desc}</p>
+                                <div class="btn-read-visual">
+                                    FULL REPORT <ChevronRight size={16} />
+                                </div>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">UNSEEN<span>_</span></div>
+                    <p>
+                        A non-profit movement dedicated to the preservation of
+                        raw musical expression outside the K-pop industrial
+                        complex.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>DISRUPT</h4>
+                    <ul>
+                        <li><a href="#">SUBMIT LEAKS</a></li>
+                        <li><a href="#">SUPPORT INDIE</a></li>
+                        <li><a href="#">ARTIST RIGHTS</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 UNSEEN COLLECTIVE. NO PERFECTION. NO CHAINS.</p>
+            </div>
+        </div>
+    </footer>
+</Layout>
+
+<script>
+    // Hero parallax
+    window.addEventListener("scroll", () => {
+        const bg = document.getElementById("hero-bg");
+        if (bg) {
+            bg.style.transform = `translateY(${window.scrollY * 0.4}px) scale(1.1)`;
+        }
+    });
+</script>
+
+<style>
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 4rem;
+        background: rgba(5, 5, 5, 0.8);
+        backdrop-filter: blur(15px);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .logo span {
+        color: var(--accent-color);
+        animation: blink 1s infinite;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+    }
+
+    .nav-links a {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        transition: var(--transition);
+        color: var(--muted-color);
+    }
+
+    .nav-links a:hover {
+        color: var(--accent-color);
+    }
+
+    .btn-join {
+        background: var(--accent-color);
+        border: none;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .btn-join:hover {
+        filter: brightness(1.2);
+        transform: scale(1.05);
+    }
+
+    /* Hero */
+    .hero {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/hero_rebel_music_1770653901993.png");
+        background-size: cover;
+        background-position: center;
+        filter: grayscale(1) brightness(0.4);
+        z-index: -2;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            var(--bg-color) 85%
+        );
+        z-index: -1;
+    }
+
+    .hero-content {
+        max-width: 900px;
+        padding: 0 2rem;
+    }
+
+    h1 {
+        font-size: clamp(3rem, 10vw, 7rem);
+        line-height: 0.85;
+        margin-bottom: 2rem;
+    }
+
+    .hero-sub {
+        font-family: var(--font-mono);
+        color: var(--muted-color);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto 3rem;
+    }
+
+    .hero-btns {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background: white;
+        color: black;
+        padding: 1.2rem 2.5rem;
+        font-family: var(--font-heading);
+        font-size: 1.4rem;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-outline {
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        padding: 1.2rem 2.5rem;
+        font-family: var(--font-heading);
+        font-size: 1.4rem;
+        transition: var(--transition);
+        cursor: pointer;
+    }
+
+    .btn-primary:hover,
+    .btn-outline:hover {
+        background: var(--accent-color);
+        color: white;
+        border-color: var(--accent-color);
+        transform: translateY(-5px);
+    }
+
+    /* Dark Side Section */
+    .dark-side {
+        padding: 10rem 0;
+        background: #080808;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 6rem;
+    }
+
+    .pre-title {
+        color: var(--accent-color);
+        font-family: var(--font-mono);
+        display: block;
+        letter-spacing: 5px;
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        font-size: 5rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+    }
+
+    .feature-card {
+        padding: 4rem 3rem;
+        background: var(--secondary-color);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        transition: var(--transition);
+        cursor: pointer;
+        text-align: left;
+        display: block;
+        width: 100%;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .feature-card:hover {
+        border-color: var(--accent-color);
+        transform: translateY(-10px);
+    }
+
+    .feature-card.highlighted {
+        background: #1a0505;
+        border-color: rgba(255, 31, 31, 0.2);
+    }
+
+    .feature-card h3 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+        color: var(--muted-color);
+    }
+
+    /* News Section */
+    .news {
+        padding-bottom: 10rem;
+    }
+
+    .marquee {
+        background: var(--accent-color);
+        overflow: hidden;
+        padding: 1.5rem 0;
+        margin-bottom: 10rem;
+        transform: rotate(-1deg) scale(1.05);
+    }
+
+    .marquee-inner {
+        display: flex;
+        white-space: nowrap;
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        animation: marquee 30s linear infinite;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .news-layout {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: 6rem;
+    }
+
+    .news-header h2 {
+        font-size: 4rem;
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .news-header p {
+        color: var(--muted-color);
+        font-family: var(--font-mono);
+    }
+
+    .headlines-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .headline-item {
+        border-left: 1px solid var(--accent-color);
+        padding: 0 0 0 3rem;
+        transition: var(--transition);
+        cursor: pointer;
+        background: transparent;
+        text-align: left;
+        width: 100%;
+        color: inherit;
+        display: block;
+        text-decoration: none;
+    }
+
+    .headline-item:hover {
+        transform: translateX(20px);
+    }
+
+    .headline-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+    }
+
+    .tag {
+        color: var(--accent-color);
+        font-weight: bold;
+    }
+
+    .date {
+        color: #444;
+    }
+
+    .headline-item h3 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        color: #ddd;
+    }
+
+    .headline-item p {
+        color: var(--muted-color);
+        margin-bottom: 1.5rem;
+        max-width: 600px;
+    }
+
+    .btn-read-visual {
+        color: var(--accent-color);
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 8rem 0 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 10rem;
+        margin-bottom: 5rem;
+    }
+
+    .footer-brand p {
+        color: var(--muted-color);
+        margin-top: 1.5rem;
+        max-width: 300px;
+    }
+
+    .footer-links h4 {
+        margin-bottom: 2rem;
+        color: var(--accent-color);
+    }
+
+    .footer-links ul li {
+        margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+        color: var(--muted-color);
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 4rem;
+        color: #333;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .news-layout {
+            grid-template-columns: 1fr;
+        }
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+    }
+</style>

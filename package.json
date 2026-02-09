@@ -1,0 +1,19 @@
+{
+  "name": "unseen-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^7.2.5",
+    "@lucide/astro": "^0.563.0",
+    "astro": "^5.17.1",
+    "lucide-astro": "^0.556.0",
+    "svelte": "^5.50.0",
+    "svelte-spa-router": "^4.0.1"
+  }
+}
