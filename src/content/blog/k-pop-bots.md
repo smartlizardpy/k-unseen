@@ -1,4 +1,4 @@
-```markdown
+
 ---
 title: "Algorithms Over Artists: How K-Pop Bots Manufacture Global Popularity"
 description: "An investigative report into how automated streaming bots, algorithmic manipulation, and data engineering are used by major K-pop labels to inflate stream counts, distort charts, and manufacture the illusion of organic global success."
